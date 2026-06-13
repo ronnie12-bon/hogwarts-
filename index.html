@@ -78,9 +78,89 @@ Accept Enrollment
 </div>
 
 <script>
+
 function startJourney(){
-    alert("Welcome to Hogwarts! The Sorting Hat awaits...");
+
+    let houses = [
+        {
+            name:"🦁 Gryffindor",
+            color:"#740001"
+        },
+        {
+            name:"🦅 Ravenclaw",
+            color:"#0E1A40"
+        },
+        {
+            name:"🦡 Hufflepuff",
+            color:"#ECB939"
+        },
+        {
+            name:"🐍 Slytherin",
+            color:"#1A472A"
+        }
+    ];
+
+    let chosenHouse =
+        houses[Math.floor(Math.random()*houses.length)];
+
+    document.body.innerHTML = `
+    <div style="
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:${chosenHouse.color};
+        color:white;
+        flex-direction:column;
+        font-family:Georgia;
+    ">
+        <h1>The Sorting Hat Has Spoken!</h1>
+
+        <h2>${chosenHouse.name}</h2>
+
+        <p>Welcome to your new house.</p>
+
+        <button onclick="goDashboard()"
+        style="
+        padding:15px 30px;
+        font-size:18px;
+        cursor:pointer;
+        ">
+        Enter Hogwarts
+        </button>
+
+    </div>
+    `;
 }
+
+function goDashboard(){
+
+    document.body.innerHTML = `
+    <div style="
+        background:black;
+        color:white;
+        min-height:100vh;
+        text-align:center;
+        padding-top:100px;
+        font-family:Arial;
+    ">
+
+        <h1>🏰 Hogwarts Dashboard</h1>
+
+        <h2>💰 Galleons: 0</h2>
+
+        <h2>📚 Study Minutes: 0</h2>
+
+        <h2>🎒 Inventory: Empty</h2>
+
+        <button>
+            Start Pomodoro
+        </button>
+
+    </div>
+    `;
+}
+
 </script>
 
 </body>
