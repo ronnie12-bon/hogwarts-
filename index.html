@@ -174,6 +174,12 @@ ${
 }
 </h2>
 
+<button onclick="openInventory()">
+🎒 Open Inventory
+</button>
+
+<br><br>
+
         <button onclick="openShop()">
 🛒 Visit Diagon Alley
 </button>
@@ -293,6 +299,45 @@ function buyItem(itemName, price){
     alert(itemName + " purchased!");
 
     openShop();
+}
+
+function openInventory(){
+
+    let inventory =
+        JSON.parse(localStorage.getItem("inventory")) || [];
+
+    let itemList = "";
+
+    if(inventory.length === 0){
+        itemList = "<p>Your trunk is empty.</p>";
+    }else{
+        inventory.forEach(item=>{
+            itemList += `<p>✨ ${item}</p>`;
+        });
+    }
+
+    document.body.innerHTML = `
+    <div style="
+        background:black;
+        color:white;
+        min-height:100vh;
+        text-align:center;
+        padding-top:50px;
+        font-family:Arial;
+    ">
+
+        <h1>🎒 Wizard Trunk</h1>
+
+        ${itemList}
+
+        <br>
+
+        <button onclick="goDashboard()">
+        Return to Dashboard
+        </button>
+
+    </div>
+    `;
 }
     
 </script>
