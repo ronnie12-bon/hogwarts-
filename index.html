@@ -195,8 +195,21 @@ ${
 }
 </h2>
 
+<h2>
+🏆 Achievements:
+${
+(JSON.parse(localStorage.getItem("achievements")) || []).length
+}
+</h2>
+
 <button onclick="openInventory()">
 🎒 Open Inventory
+</button>
+
+<br><br>
+
+<button onclick="openAchievements()">
+🏆 Achievements
 </button>
 
 <br><br>
@@ -295,7 +308,8 @@ let timeLeft = 25 * 60;
         "+25 Galleons Earned!"
     );
 
-    goDashboard();
+   checkAchievements();
+goDashboard();
 }
 
 function openShop(){
@@ -412,6 +426,133 @@ function openInventory(){
 
         <button onclick="goDashboard()">
         Return to Dashboard
+        </button>
+
+    </div>
+    `;
+}
+
+function checkAchievements(){
+
+    let minutes =
+        Number(localStorage.getItem("minutes")) || 0;
+
+    let achievements =
+        JSON.parse(localStorage.getItem("achievements")) || [];
+
+    if(minutes >= 60 &&
+       !achievements.includes("First Year Student")){
+
+        achievements.push("First Year Student");
+
+        alert(
+        "🏆 Achievement Unlocked!\n\nFirst Year Student"
+        );
+    }
+
+    if(minutes >= 500 &&
+       !achievements.includes("Prefect")){
+
+        achievements.push("Prefect");
+
+        alert(
+        "🏆 Achievement Unlocked!\n\nPrefect"
+        );
+    }
+
+    if(minutes >= 2000 &&
+       !achievements.includes("Head Student")){
+
+        achievements.push("Head Student");
+
+        alert(
+        "🏆 Achievement Unlocked!\n\nHead Student"
+        );
+    }
+
+    localStorage.setItem(
+        "achievements",
+        JSON.stringify(achievements)
+    );
+}
+
+function checkAchievements(){
+
+    let minutes =
+        Number(localStorage.getItem("minutes")) || 0;
+
+    let achievements =
+        JSON.parse(localStorage.getItem("achievements")) || [];
+
+    if(minutes >= 60 &&
+       !achievements.includes("First Year Student")){
+
+        achievements.push("First Year Student");
+
+        alert(
+        "🏆 Achievement Unlocked!\n\nFirst Year Student"
+        );
+    }
+
+    if(minutes >= 500 &&
+       !achievements.includes("Prefect")){
+
+        achievements.push("Prefect");
+    }
+
+    if(minutes >= 2000 &&
+       !achievements.includes("Head Student")){
+
+        achievements.push("Head Student");
+    }
+
+    localStorage.setItem(
+        "achievements",
+        JSON.stringify(achievements)
+    );
+}
+    
+function openAchievements(){
+
+    let achievements =
+      JSON.parse(localStorage.getItem("achievements")) || [];
+
+    let achievementList = "";
+
+    if(achievements.length === 0){
+
+        achievementList =
+        "<p>No achievements unlocked yet.</p>";
+
+    }else{
+
+        achievements.forEach(a=>{
+
+            achievementList +=
+            `<p>🏆 ${a}</p>`;
+
+        });
+
+    }
+
+    document.body.innerHTML = `
+    <div style="
+        background:black;
+        color:white;
+        min-height:100vh;
+        text-align:center;
+        padding-top:50px;
+        font-family:Arial;
+    ">
+
+        <h1>🏆 Achievement Hall</h1>
+
+        ${achievementList}
+
+        <br>
+
+        <button onclick="goDashboard()">
+        Return
         </button>
 
     </div>
