@@ -198,7 +198,61 @@ ${
     `;
 }
 
-    function study(){
+  let timerInterval;
+
+function study(){
+
+   let timeLeft = 10;
+
+    document.body.innerHTML = `
+    <div style="
+        background:black;
+        color:white;
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        font-family:Arial;
+    ">
+
+        <h1>📚 Study Session</h1>
+
+        <h2 id="timer">25:00</h2>
+
+        <p>Stay focused, young wizard.</p>
+
+    </div>
+    `;
+
+    timerInterval = setInterval(()=>{
+
+        let minutes =
+            Math.floor(timeLeft / 60);
+
+        let seconds =
+            timeLeft % 60;
+
+        document.getElementById("timer").innerText =
+            `${minutes}:${seconds
+                .toString()
+                .padStart(2,"0")}`;
+
+        timeLeft--;
+
+        if(timeLeft < 0){
+
+            clearInterval(timerInterval);
+
+            completeStudy();
+
+        }
+
+    },1000);
+
+}
+
+  function completeStudy(){
 
     let currentGalleons =
         Number(localStorage.getItem("galleons")) || 0;
@@ -206,15 +260,22 @@ ${
     let currentMinutes =
         Number(localStorage.getItem("minutes")) || 0;
 
-    currentMinutes += 25;
     currentGalleons += 25;
+    currentMinutes += 25;
 
-    localStorage.setItem("minutes", currentMinutes);
-    localStorage.setItem("galleons", currentGalleons);
+    localStorage.setItem(
+        "galleons",
+        currentGalleons
+    );
+
+    localStorage.setItem(
+        "minutes",
+        currentMinutes
+    );
 
     alert(
-      "You studied for 25 minutes!\n\n" +
-      "+25 Galleons earned!"
+        "✨ Study Session Complete!\n\n" +
+        "+25 Galleons Earned!"
     );
 
     goDashboard();
