@@ -167,7 +167,22 @@ function goDashboard(){
     Number(localStorage.getItem("minutes")) || 0
 }</h2>
 
-        <h2>🎒 Inventory: Empty</h2>
+       <h2>
+🎒 Items Owned:
+${
+(JSON.parse(localStorage.getItem("inventory")) || []).length
+}
+</h2>
+
+        <button onclick="openShop()">
+🛒 Visit Diagon Alley
+</button>
+
+<br><br>
+
+<button onclick="study()">
+📚 Start Study Session
+</button>
 
         <button onclick="study()">
     Start Study Session
@@ -199,6 +214,87 @@ function goDashboard(){
     goDashboard();
 }
 
+function openShop(){
+
+    document.body.innerHTML = `
+    <div style="
+        background:#111;
+        color:white;
+        min-height:100vh;
+        padding:30px;
+        text-align:center;
+        font-family:Arial;
+    ">
+
+    <h1>🛒 Diagon Alley</h1>
+
+    <h2>💰 Galleons: ${
+      Number(localStorage.getItem("galleons")) || 0
+    }</h2>
+
+    <hr>
+
+    <h3>🍫 Chocolate Frog - 40 Galleons</h3>
+
+    <button onclick="buyItem('Chocolate Frog',40)">
+    Buy
+    </button>
+
+    <hr>
+
+    <h3>🧹 Nimbus 2000 - 3000 Galleons</h3>
+
+    <button onclick="buyItem('Nimbus 2000',3000)">
+    Buy
+    </button>
+
+    <hr>
+
+    <h3>🪄 Phoenix Wand - 4000 Galleons</h3>
+
+    <button onclick="buyItem('Phoenix Wand',4000)">
+    Buy
+    </button>
+
+    <hr><br>
+
+    <button onclick="goDashboard()">
+    Return to Hogwarts
+    </button>
+
+    </div>
+    `;
+}
+
+function buyItem(itemName, price){
+
+    let galleons =
+      Number(localStorage.getItem("galleons")) || 0;
+
+    if(galleons < price){
+        alert("Not enough Galleons!");
+        return;
+    }
+
+    galleons -= price;
+
+    localStorage.setItem("galleons", galleons);
+
+    let inventory =
+      JSON.parse(localStorage.getItem("inventory")) || [];
+
+    inventory.push(itemName);
+
+    localStorage.setItem(
+      "inventory",
+      JSON.stringify(inventory)
+    );
+
+    alert(itemName + " purchased!");
+
+    openShop();
+}
+    
 </script>
 
 </body>
