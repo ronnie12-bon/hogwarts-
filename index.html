@@ -1,19 +1,87 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Hogwarts Study Simulator</title>
+<title>Hogwarts Acceptance Letter</title>
+
+<style>
+body{
+    background:#1a1a1a;
+    font-family:Georgia, serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.letter{
+    background:#f5e6c8;
+    width:700px;
+    padding:40px;
+    border-radius:10px;
+    box-shadow:0 0 20px gold;
+}
+
+h1{
+    text-align:center;
+    color:#7b1113;
+}
+
+button{
+    display:block;
+    margin:30px auto;
+    padding:15px 30px;
+    background:#7b1113;
+    color:white;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:18px;
+}
+</style>
+
 </head>
-<body style="background:black;color:white;text-align:center;font-family:Arial;padding-top:100px;">
 
-    <h1>⚡ Hogwarts Study Simulator ⚡</h1>
+<body>
 
-    <h2>Welcome to Hogwarts</h2>
+<div class="letter">
 
-    <p>Your magical study journey begins here.</p>
+<h1>⚡ Hogwarts School of Witchcraft and Wizardry ⚡</h1>
 
-    <button onclick="alert('Your Hogwarts Acceptance Letter has arrived!')">
-        Receive Acceptance Letter
-    </button>
+<p>Dear Student,</p>
+
+<p>
+We are pleased to inform you that you have been accepted
+at Hogwarts School of Witchcraft and Wizardry.
+</p>
+
+<p>
+Term begins on September 1st.
+Please prepare your books, wand, and magical supplies.
+</p>
+
+<p>
+We await your owl by no later than July 31st.
+</p>
+
+<p>
+Yours sincerely,
+</p>
+
+<p>
+Professor McGonagall
+</p>
+
+<button onclick="startJourney()">
+Accept Enrollment
+</button>
+
+</div>
+
+<script>
+function startJourney(){
+    alert("Welcome to Hogwarts! The Sorting Hat awaits...");
+}
+</script>
 
 </body>
 </html>
