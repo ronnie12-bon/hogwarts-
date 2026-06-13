@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Hogwarts Acceptance Letter</title>
+<title>Hogwarts Study Simulator</title>
 
 <style>
+
 body{
-    background:#1a1a1a;
+    margin:0;
     font-family:Georgia, serif;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
 }
 
 .letter{
@@ -21,27 +18,32 @@ body{
     box-shadow:0 0 20px gold;
 }
 
+.letter-page{
+    background:#1a1a1a;
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
 h1{
     text-align:center;
-    color:#7b1113;
 }
 
 button{
-    display:block;
-    margin:30px auto;
     padding:15px 30px;
-    background:#7b1113;
-    color:white;
+    font-size:18px;
+    cursor:pointer;
     border:none;
     border-radius:5px;
-    cursor:pointer;
-    font-size:18px;
 }
-</style>
 
+</style>
 </head>
 
 <body>
+
+<div class="letter-page">
 
 <div class="letter">
 
@@ -63,13 +65,7 @@ Please prepare your books, wand, and magical supplies.
 We await your owl by no later than July 31st.
 </p>
 
-<p>
-Yours sincerely,
-</p>
-
-<p>
-Professor McGonagall
-</p>
+<p>Professor McGonagall</p>
 
 <button onclick="startJourney()">
 Accept Enrollment
@@ -77,75 +73,9 @@ Accept Enrollment
 
 </div>
 
+</div>
+
 <script>
-
-function startJourney(){
-
-    let houses = [
-        {
-            name:"🦁 Gryffindor",
-            color:"#740001"
-        },
-        {
-            name:"🦅 Ravenclaw",
-            color:"#0E1A40"
-        },
-        {
-            name:"🦡 Hufflepuff",
-            color:"#ECB939"
-        },
-        {
-            name:"🐍 Slytherin",
-            color:"#1A472A"
-        }
-    ];
-
-    let chosenHouse =
-        houses[Math.floor(Math.random()*houses.length)];
-
-    document.body.innerHTML = `
-    <div style="
-        height:100vh;
-        display:flex;
-        justify-content:center;
-        align-items:center;
-        background:${chosenHouse.color};
-        color:white;
-        flex-direction:column;
-        font-family:Georgia;
-    ">
-        <h1>The Sorting Hat Has Spoken!</h1>
-
-        <h2>${chosenHouse.name}</h2>
-
-        <p>Welcome to your new house.</p>
-
-        <button onclick="goDashboard()"
-        style="
-        padding:15px 30px;
-        font-size:18px;
-        cursor:pointer;
-        ">
-        Enter Hogwarts
-        </button>
-
-    </div>
-    `;
-}
-
-function goDashboard(){
-
-    document.body.innerHTML = `
-    <div style="
-        background:black;
-        color:white;
-        min-height:100vh;
-        text-align:center;
-        padding-top:100px;
-        font-family:Arial;
-    ">
-
-       <script>
 
 let studentName = "";
 
@@ -153,7 +83,11 @@ function startJourney(){
 
     studentName = prompt("What is your name, young wizard?");
 
-    let houses = [
+    if(!studentName){
+        studentName = "Student";
+    }
+
+    const houses = [
         {
             name:"🦁 Gryffindor",
             color:"#740001"
@@ -172,38 +106,42 @@ function startJourney(){
         }
     ];
 
-    let chosenHouse =
+    const chosenHouse =
         houses[Math.floor(Math.random()*houses.length)];
 
-    localStorage.setItem("house", chosenHouse.name);
     localStorage.setItem("studentName", studentName);
+    localStorage.setItem("house", chosenHouse.name);
 
     document.body.innerHTML = `
     <div style="
         height:100vh;
+        background:${chosenHouse.color};
         display:flex;
         justify-content:center;
         align-items:center;
-        background:${chosenHouse.color};
-        color:white;
         flex-direction:column;
+        color:white;
         font-family:Georgia;
     ">
+
         <h1>The Sorting Hat Has Spoken!</h1>
 
         <h2>${chosenHouse.name}</h2>
 
+        <p>Welcome to your new house.</p>
+
         <button onclick="goDashboard()">
-        Enter Hogwarts
+            Enter Hogwarts
         </button>
+
     </div>
     `;
 }
 
 function goDashboard(){
 
-    let house = localStorage.getItem("house");
-    let name = localStorage.getItem("studentName");
+    const name = localStorage.getItem("studentName");
+    const house = localStorage.getItem("house");
 
     document.body.innerHTML = `
     <div style="
@@ -226,16 +164,6 @@ function goDashboard(){
         <h2>📚 Study Minutes: 0</h2>
 
         <h2>🎒 Inventory: Empty</h2>
-
-        <button>
-            Start Pomodoro
-        </button>
-
-    </div>
-    `;
-}
-
-</script>
 
         <button>
             Start Pomodoro
