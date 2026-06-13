@@ -118,15 +118,10 @@ function startJourney(){
     const chosenHouse =
         houses[Math.floor(Math.random()*houses.length)];
 
-    localStorage.setItem("studentName", studentName);
-    const house =
-localStorage.getItem("house");
-    const house =
-    localStorage.setItem(
-    "houseImage",
-    chosenHouse.image
-);
-
+   localStorage.setItem("studentName", studentName);
+   localStorage.setItem("house", chosenHouse.name);
+   localStorage.setItem("houseImage", chosenHouse.image);
+    
     document.body.innerHTML = `
     <div style="
         height:100vh;
@@ -155,9 +150,9 @@ localStorage.getItem("house");
 
 function goDashboard(){
 
-    const name = localStorage.getItem("studentName");
-    const houseImage =
-localStorage.getItem("houseImage");
+   const name = localStorage.getItem("studentName");
+const house = localStorage.getItem("house");
+const houseImage = localStorage.getItem("houseImage");
 
     document.body.innerHTML = `
     <div style="
@@ -175,7 +170,12 @@ localStorage.getItem("houseImage");
 
        <img
 src="${houseImage}"
-width="150"
+width="180"
+style="
+border-radius:15px;
+margin:20px;
+box-shadow:0 0 20px gold;
+"
 >
 
 <h2>${house}</h2>
@@ -209,10 +209,6 @@ ${
 
 <button onclick="study()">
 📚 Start Study Session
-</button>
-
-        <button onclick="study()">
-    Start Study Session
 </button>
 
     </div>
