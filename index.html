@@ -87,30 +87,45 @@ function startJourney(){
         studentName = "Student";
     }
 
-    const houses = [
-        {
-            name:"🦁 Gryffindor",
-            color:"#740001"
-        },
-        {
-            name:"🦅 Ravenclaw",
-            color:"#0E1A40"
-        },
-        {
-            name:"🦡 Hufflepuff",
-            color:"#ECB939"
-        },
-        {
-            name:"🐍 Slytherin",
-            color:"#1A472A"
-        }
-    ];
+   const houses = [
+
+{
+    name:"🦁 Gryffindor",
+    color:"#740001",
+    image:"images/gryffindor.jpg"
+},
+
+{
+    name:"🦅 Ravenclaw",
+    color:"#0E1A40",
+    image:"images/ravenclaw.jpg"
+},
+
+{
+    name:"🦡 Hufflepuff",
+    color:"#ECB939",
+    image:"images/hufflepuff.jpg"
+},
+
+{
+    name:"🐍 Slytherin",
+    color:"#1A472A",
+    image:"images/slytherin.jpg"
+}
+
+];
 
     const chosenHouse =
         houses[Math.floor(Math.random()*houses.length)];
 
     localStorage.setItem("studentName", studentName);
-    localStorage.setItem("house", chosenHouse.name);
+    const house =
+localStorage.getItem("house");
+    const house =
+    localStorage.setItem(
+    "houseImage",
+    chosenHouse.image
+);
 
     document.body.innerHTML = `
     <div style="
@@ -141,7 +156,8 @@ function startJourney(){
 function goDashboard(){
 
     const name = localStorage.getItem("studentName");
-    const house = localStorage.getItem("house");
+    const houseImage =
+localStorage.getItem("houseImage");
 
     document.body.innerHTML = `
     <div style="
@@ -157,7 +173,12 @@ function goDashboard(){
 
         <h2>Welcome, ${name}</h2>
 
-        <h2>${house}</h2>
+       <img
+src="${houseImage}"
+width="150"
+>
+
+<h2>${house}</h2>
 
        <h2>💰 Galleons: ${
     Number(localStorage.getItem("galleons")) || 0
