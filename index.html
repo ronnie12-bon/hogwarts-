@@ -159,9 +159,13 @@ function goDashboard(){
 
         <h2>${house}</h2>
 
-        <h2>💰 Galleons: 0</h2>
+       <h2>💰 Galleons: ${
+    Number(localStorage.getItem("galleons")) || 0
+}</h2>
 
-        <h2>📚 Study Minutes: 0</h2>
+<h2>📚 Study Minutes: ${
+    Number(localStorage.getItem("minutes")) || 0
+}</h2>
 
         <h2>🎒 Inventory: Empty</h2>
 
@@ -171,6 +175,28 @@ function goDashboard(){
 
     </div>
     `;
+}
+
+    function study(){
+
+    let currentGalleons =
+        Number(localStorage.getItem("galleons")) || 0;
+
+    let currentMinutes =
+        Number(localStorage.getItem("minutes")) || 0;
+
+    currentMinutes += 25;
+    currentGalleons += 25;
+
+    localStorage.setItem("minutes", currentMinutes);
+    localStorage.setItem("galleons", currentGalleons);
+
+    alert(
+      "You studied for 25 minutes!\n\n" +
+      "+25 Galleons earned!"
+    );
+
+    goDashboard();
 }
 
 </script>
